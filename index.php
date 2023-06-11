@@ -3,6 +3,7 @@ require_once("controlador/ControlUsuario.php");
 require_once("controlador/Sesion.php");
     //echo "hola index <br>";
     $sesion = new Sesion();
+    $usr = new ControlUsuario();
     /*
    if (  session_status() == PHP_SESSION_ACTIVE){
     echo "Sesion Activa <br>";
@@ -17,30 +18,11 @@ require_once("controlador/Sesion.php");
     //echo"Hizo Post<br>";
     //require_once("controlador/ControlUsuario.php");
     //require_once("controlador/Sesion.php");
-    $usr = new ControlUsuario();
+    //$usr = new ControlUsuario();
     $nombre = $_POST["username"];
     $pass = $_POST["password"];
+    $usr->loguear($nombre, $pass , $sesion);
 
-      if( $usr->exists($nombre)){
-          //echo "Existe <br>";
-          if( $usr->validar($nombre, $pass) ){
-            //echo "Valido <br>";
-            
-            //$sesion = new Sesion();
-            $sesion->setUsuario($nombre);
-              if($nombre=="admin"){     //aca habria que hacer if($usr->EsAdmin()) más adelante
-                //echo "Es admin <br>";
-                require_once("vista/admin.php");
-              }else{
-                //echo "Es Usuario comun <br>";
-                require_once("vista/home.php");
-              }
-          }else{
-            echo "Invalido <br>"; 
-          }
-      }else{
-        echo "No existe <br>";
-      }
    }else if(isset( $_SESSION['usuario'] ) ){      //Entra o esta en la pagina con sesion iniciada 
        
         if(isset($_GET["accion"]) and ($_GET["accion"])=="salir"){
@@ -51,8 +33,18 @@ require_once("controlador/Sesion.php");
           require_once("vista/home.php");
         }
     
-   }else{ //entra por primera vez
-     require_once("vista/login.php");
+   }else if(isset($_GET["accion"]) and ($_GET["accion"])=="regusr"){ //preiona el link de registrarse 
+   // echo "Get accion = regusr <br>";
+    $usr->registro();
+   }else if (isset($_POST["userreg"] )){ // lleno el form de registro
+       echo "Hizo post de registro <br>";//usr 
+       $nombusr = $_POST["userreg"];
+       $pass = $_POST["passreg"];
+       $nombre = $_POST["nombre"];
+       $apellido = $_POST["apellido"];
+       $usr->altaUsuario($nombusr,$pass,$nombre,$apellido);
+   }else{ //entra por primera vez 
+    require_once("vista/login.php");
    }
     
 ?>

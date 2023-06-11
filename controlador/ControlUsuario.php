@@ -5,12 +5,12 @@
 
         public function __Construct(){
           require_once("modelo/ModeloUsuario.php");
-          $this->musr  = new ModeloUsuario();   
+          $this->musr  = new ModeloUsuario();
         }
         public function loguear($nombre, $pass , $sesion){            
-          if( $musr->exists($nombre)){
+          if( $this->musr->exists($nombre)){
             //echo "Existe <br>";
-            if( $musr->validar($nombre, $pass) ){
+            if( $this->musr->validar($nombre, $pass) ){
               //echo "Valido <br>";
               
               //$sesion = new Sesion();
@@ -37,7 +37,24 @@
         public function validar($nombre, $pass){
           return $this->musr->validar($nombre, $pass);
         }
-        
+
+        public function registro(){            
+          require_once("vista/registro.php");
+        }
+        public function altaUsuario($nombusr,$pass,$nombre,$apellido){
+          if( ! $this->musr->exists($nombusr) ){
+              //echo "Alta OK <br>";
+              $this->musr->altaUsuario($nombusr,$pass,$nombre,$apellido);
+              $exitoAlta = true;
+              require_once("vista/login.php");
+          }else{
+              $exitoAlta = false;
+              require_once("vista/login.php");
+              //echo "Error alta ya existe <br>";
+            
+          }            
+          
+        }
     }
 
 ?>
