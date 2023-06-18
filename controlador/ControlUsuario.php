@@ -7,7 +7,7 @@
           require_once("modelo/ModeloUsuario.php");
           $this->musr  = new ModeloUsuario();
         }
-        public function loguear($nombre, $pass , $sesion){            
+        public function loguear($nombre, $pass , $sesion){        
           if( $this->musr->exists($nombre)){
             //echo "Existe <br>";
             if( $this->musr->validar($nombre, $pass) ){
@@ -23,10 +23,14 @@
                   require_once("vista/home.php");
                 }
             }else{
-              echo "Invalido <br>"; 
+              $sesion->setMensaje("Contraseña inválida"); 
+              require_once("vista/login.php");
+              
             }
-          }else{
-            echo "No existe <br>";
+           }else{
+            //echo "No existe <br>";
+            $sesion->setMensaje("Usuario no existe"); 
+            require_once("vista/login.php");
           }
         }
         public function exists($usuario){            
@@ -41,16 +45,16 @@
         public function registro(){            
           require_once("vista/registro.php");
         }
-        public function altaUsuario($nombusr,$pass,$nombre,$apellido){
+        public function altaUsuario($nombusr,$pass,$nombre,$apellido,$sesion){
           if( ! $this->musr->exists($nombusr) ){
-              //echo "Alta OK <br>";
+              echo "Alta OK <br>";
               $this->musr->altaUsuario($nombusr,$pass,$nombre,$apellido);
               $exitoAlta = true;
               require_once("vista/login.php");
           }else{
               $exitoAlta = false;
               require_once("vista/login.php");
-              //echo "Error alta ya existe <br>";
+              echo "Error alta ya existe <br>";
             
           }            
           
