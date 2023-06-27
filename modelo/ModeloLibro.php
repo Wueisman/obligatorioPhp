@@ -57,11 +57,14 @@
         public function exists($Id){
             $existe = false;
             $res =  $this->obtenerLibros();
-            foreach ($res as $value) {
-                if($value["Id"]==="$Id"){
-                    $existe = true;
-                 }
-              }          
+            if($res){
+                foreach ($res as $value) {
+                    if($value["Id"]==="$Id"){
+                        $existe = true;
+                     }
+                  } 
+            }
+         
             return $existe;
         }
 

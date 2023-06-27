@@ -10,8 +10,12 @@
         }
 
         public function listar(){            
-            //$musr = new ModeloUsuario();
-            $listaLibros = $this->mlibro->obtenerLibros();
+            
+            $listaLibros = array();
+            if($this->mlibro->obtenerLibros()){ //estaba tirando error cuando devolvia false
+              $listaLibros = $this->mlibro->obtenerLibros();
+            }
+            
             require_once("vista/lista_libros.php");
           }
 
