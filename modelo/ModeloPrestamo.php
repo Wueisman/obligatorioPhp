@@ -23,6 +23,9 @@
             }
         }
         public function agregarPrestamo($id, $fprestamo,  $fdevolucion, $usuario) {
+            if (strtotime($fprestamo) > strtotime($fdevolucion)) {
+                return false;
+            }
             if ($this->exists($id)){
                 $resultado=false;
             }else{
@@ -73,6 +76,14 @@
             $count = mysqli_fetch_array($result)[0];
             return $count > 0;
         }
+
+        public function libroDisponible($id_libro) {
+            $fecha_actual = date('Y-m-d');
+            $sql = "SELECT COUNT(*) FROM prestamos WHERE id_libro = '$id_libro' AND fecha_devolucion > '$fecha_actual'";
+            $result = mysqli_query($this->link, $sql);
+            $count = mysqli_fetch_array($result)[0];
+            return $count == 0;
+        }        
         
 
     }
