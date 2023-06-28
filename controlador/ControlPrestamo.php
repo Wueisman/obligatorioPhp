@@ -14,16 +14,22 @@
         public function irDevolver(){            
             require_once("vista/devolver.php");
         }
-        public function agregarPrestamo($id, $fprestamo,  $fdevolucion, $sesion){
-            $usuario = $sesion->getUsuario();
-           $resultado = $this->mprestamo->agregarPrestamo($id, $fprestamo,  $fdevolucion, $usuario);
-           if($resultado){
-            $sesion->setMensaje("Prestamo agregado");
-          }else{
-            $sesion->setMensaje("error agregando el prestamo");
+        public function agregarPrestamo($id, $fprestamo, $fdevolucion, $sesion) {
+          $usuario = $sesion->getUsuario();
+          if ($this->mprestamo->existeLibro($id)) {
+              $resultado = $this->mprestamo->agregarPrestamo($id, $fprestamo, $fdevolucion, $usuario);
+              if ($resultado) {
+                  $sesion->setMensaje("Préstamo agregado");
+              } else {
+                  $sesion->setMensaje("Error agregando el préstamo");
+              }
+          } else {
+              $sesion->setMensaje("El libro no existe");
           }
-            require_once("vista/alta_prestamo.php");
-        }
+      
+          require_once("vista/alta_prestamo.php");
+      }
+      
 
         public function eliminarPrestamo($id, $sesion){
             $usuario = $sesion->getUsuario();

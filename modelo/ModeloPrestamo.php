@@ -67,6 +67,14 @@
             return $existe;
         }
 
+        public function existeLibro($id) {
+            $sql = "SELECT COUNT(*) FROM libros WHERE id = '$id'";
+            $result = mysqli_query($this->link, $sql);
+            $count = mysqli_fetch_array($result)[0];
+            return $count > 0;
+        }
+        
+
     }
 
 

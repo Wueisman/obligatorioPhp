@@ -46,11 +46,14 @@
           }
 
           public function librosDisponibles(){            
-            //$musr = new ModeloUsuario();
-            $listaLibros = $this->mlibro->librosDisponibles();
+            $listaLibros = array();
+            if ($this->mlibro->librosDisponibles()){
+              $listaLibros = $this->mlibro->librosDisponibles();
+            }
             require_once("vista/lista_libros.php");
+            }
           }
 
-    }
+    
 
 ?>
