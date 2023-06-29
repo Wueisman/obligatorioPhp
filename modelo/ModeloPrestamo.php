@@ -85,7 +85,21 @@
             $result = mysqli_query($this->link, $sql);
             $count = mysqli_fetch_array($result)[0];
             return $count == 0;
-        }       
+        }    
+        
+        public function perteneceUsuario($idPrestamo, $usuario) {
+            $sql = "SELECT COUNT(*) AS count FROM prestamos WHERE id = '$idPrestamo' AND nombre_usuario = '$usuario'";
+            $resultado = mysqli_query($this->link, $sql);
+        
+            if ($resultado && mysqli_num_rows($resultado) > 0) {
+                $fila = mysqli_fetch_assoc($resultado);
+                $count = $fila['count'];
+                return ($count > 0); 
+            }
+        
+            return false; 
+        }
+        
         
 
     }

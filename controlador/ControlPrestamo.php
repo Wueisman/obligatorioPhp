@@ -49,17 +49,21 @@
 
         public function eliminarPrestamo($id, $sesion){
             $usuario = $sesion->getUsuario();
-            if ($this->mprestamo->existeLibro($id)) {
-              if($this->mprestamo->exists($id)){
-              $resultado = $this->mprestamo->eliminarPrestamo($id, $sesion);
-              if($resultado){
-                $sesion->setMensaje("Prestamo devuelto");
+            if ($this->mprestamo->existeLibro($id)){
+              if($this->mprestamo->perteneceUsuario($id, $usuario)) {
+                if($this->mprestamo->exists($id)){
+                $resultado = $this->mprestamo->eliminarPrestamo($id, $sesion);
+                if($resultado){
+                  $sesion->setMensaje("Prestamo devuelto");
+                }else{
+                  $sesion->setMensaje("Error devolviendo el prestamo");
+                }
               }else{
-                $sesion->setMensaje("Error devolviendo el prestamo");
+                $sesion->setMensaje("Error en devolucion: El libro ya se encuentra disponible");
               }
-            }else{
-              $sesion->setMensaje("Error en devolucion: El libro ya se encuentra disponible"); 
-            }
+              }else{
+                $sesion->setMensaje("No tienes permiso para devolver este libro");
+              }
             }else{
               $sesion->setMensaje("No existe un libro con ese ID");
             }
