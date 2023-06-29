@@ -29,19 +29,23 @@
 
           public function agregarLibro($id, $autor, $titulo, $sesion){
             if($this->mlibro->agregarLibro($id, $titulo, $autor )){
-              $sesion->setMensaje("Libro agregado");
+              $sesion->setMensaje("Libro agregado con exito");
             }else{
-              $sesion->setMensaje("error agregando el libro");
-            }            
+              if ($this->mlibro->exists($id)) {
+                $sesion->setMensaje("Error: ya existe un libro con ese ID");
+            } else {
+                $sesion->setMensaje("Error agregando el libro");
+            }
+          }            
             require_once("vista/alta_libro.php");
           }
 
           public function eliminarLibro($id, $sesion) {
             if ($this->mlibro->eliminarLibro($id)) {
-                $sesion->setMensaje("Libro eliminado");
+                $sesion->setMensaje("Libro eliminado con exito");
             } else {
                 if (!$this->mlibro->exists($id)) {
-                    $sesion->setMensaje("No existe un libro con ese ID");
+                    $sesion->setMensaje("Error: no existe un libro con ese ID");
                 } else {
                     $sesion->setMensaje("Error eliminando el libro");
                 }
