@@ -47,14 +47,14 @@
         }
         public function altaUsuario($nombusr,$pass,$nombre,$apellido,$sesion){
           if( ! $this->musr->exists($nombusr) ){
-              echo "Alta OK <br>";
+              echo "El nuevo usuario se registro con exito <br>";
               $this->musr->altaUsuario($nombusr,$pass,$nombre,$apellido);
               $exitoAlta = true;
               require_once("vista/login.php");
           }else{
               $exitoAlta = false;
               require_once("vista/login.php");
-              echo "Error alta ya existe <br>";
+              echo "Error: ya existe ese nombre de usuario <br>";
             
           }            
           

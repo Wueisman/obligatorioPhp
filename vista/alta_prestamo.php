@@ -25,7 +25,7 @@ ini_set('display_errors', 1);
         <form id="agregar-prestamo-form" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
             <input type="hidden" name="accion" value="agregarPrestamo">
             <div class="form-group">
-                <label for="Id">Id:</label>
+                <label for="Id">Id libro:</label>
                 <input type="text" id="Id" name="Id" required>
             </div>
             <div class="form-group">

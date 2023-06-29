@@ -29,28 +29,41 @@
 
           public function agregarLibro($id, $autor, $titulo, $sesion){
             if($this->mlibro->agregarLibro($id, $titulo, $autor )){
-              $sesion->setMensaje("Libro agregado");
+              $sesion->setMensaje("Libro agregado con exito");
             }else{
-              $sesion->setMensaje("error agregando el libro");
-            }            
+              if ($this->mlibro->exists($id)) {
+                $sesion->setMensaje("Error: ya existe un libro con ese ID");
+            } else {
+                $sesion->setMensaje("Error agregando el libro");
+            }
+          }            
             require_once("vista/alta_libro.php");
           }
 
-          public function eliminarLibro($id,$sesion){
-            if($this->mlibro->eliminarLibro($id)){
-              $sesion->setMensaje("Libro eliminado");
-            }else{
-              $sesion->setMensaje("error eliminando el libro");
-            }            
+          public function eliminarLibro($id, $sesion) {
+            if ($this->mlibro->eliminarLibro($id)) {
+                $sesion->setMensaje("Libro eliminado con exito");
+            } else {
+                if (!$this->mlibro->exists($id)) {
+                    $sesion->setMensaje("Error: no existe un libro con ese ID");
+                } else {
+                    $sesion->setMensaje("Error eliminando el libro");
+                }
+            }
+        
             require_once("vista/baja_libro.php");
-          }
+        }
+        
 
           public function librosDisponibles(){            
-            //$musr = new ModeloUsuario();
-            $listaLibros = $this->mlibro->librosDisponibles();
+            $listaLibros = array();
+            if ($this->mlibro->librosDisponibles()){
+              $listaLibros = $this->mlibro->librosDisponibles();
+            }
             require_once("vista/lista_libros.php");
+            }
           }
 
-    }
+    
 
 ?>
