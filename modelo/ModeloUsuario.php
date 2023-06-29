@@ -37,7 +37,7 @@
         }
 
         public function altaUsuario($nombusr,$pass,$nombre,$apellido){
-            $sql = "INSERT INTO usuarios (usuario,contrasenia,nombre,apellido) VALUES ('$nombusr','$$pass','$nombre','$apellido')";
+            $sql = "INSERT INTO usuarios (usuario,contrasenia,nombre,apellido) VALUES ('$nombusr','$pass','$nombre','$apellido')";
             mysqli_query($this->link,$sql);
         }
     }
