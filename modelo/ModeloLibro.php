@@ -40,33 +40,27 @@
         }
 
         public function eliminarLibro($id) {
-            if ($this->exists($id)){
+            if ($this->exists($id)) {
                 $sql = "DELETE FROM libros WHERE id ='$id' ";
                 $resultado = mysqli_query($this->link, $sql);
-            }else{
-                $resultado=false;
-            }
-            
-            if ($resultado) {
-                return true;
+        
+                if ($resultado) {
+                    return true;
+                } else {
+                    return false;
+                }
             } else {
-                return false;
+                return false; 
             }
         }
-
-        public function exists($Id){
-            $existe = false;
-            $res =  $this->obtenerLibros();
-            if($res){
-                foreach ($res as $value) {
-                    if($value["Id"]==="$Id"){
-                        $existe = true;
-                     }
-                  } 
-            }
-         
-            return $existe;
+        
+        public function exists($id) {
+            $sql = "SELECT COUNT(*) FROM libros WHERE id = '$id'";
+            $result = mysqli_query($this->link, $sql);
+            $count = mysqli_fetch_array($result)[0];
+            return $count > 0;
         }
+        
 
         public function librosDisponibles() {
             $sql = "SELECT * FROM libros WHERE id not IN (SELECT id_libro FROM prestamos)";

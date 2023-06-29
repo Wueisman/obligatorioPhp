@@ -36,14 +36,20 @@
             require_once("vista/alta_libro.php");
           }
 
-          public function eliminarLibro($id,$sesion){
-            if($this->mlibro->eliminarLibro($id)){
-              $sesion->setMensaje("Libro eliminado");
-            }else{
-              $sesion->setMensaje("error eliminando el libro");
-            }            
+          public function eliminarLibro($id, $sesion) {
+            if ($this->mlibro->eliminarLibro($id)) {
+                $sesion->setMensaje("Libro eliminado");
+            } else {
+                if (!$this->mlibro->exists($id)) {
+                    $sesion->setMensaje("No existe un libro con ese ID");
+                } else {
+                    $sesion->setMensaje("Error eliminando el libro");
+                }
+            }
+        
             require_once("vista/baja_libro.php");
-          }
+        }
+        
 
           public function librosDisponibles(){            
             $listaLibros = array();
