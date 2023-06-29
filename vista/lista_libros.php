@@ -17,7 +17,8 @@ ini_set('display_errors', 1);
         width: 100%;
     }
 
-    th, td {
+    th,
+    td {
         padding: 8px;
         text-align: left;
         border-bottom: 1px solid #ddd;
@@ -38,7 +39,8 @@ ini_set('display_errors', 1);
         <h1>Sistema de Gestión de Biblioteca</h1>
         <?php $mensaje = $_SESSION['mensaje']; ?>
         <div class="mensaje">
-            <?php if (isset($mensaje)) echo $mensaje; ?>
+            <?php if (isset($mensaje))
+                echo $mensaje; ?>
         </div>
 
         <!-- Agregar Usuario Formulario -->
@@ -57,9 +59,15 @@ ini_set('display_errors', 1);
                 <tbody>
                     <?php foreach ($listaLibros as $libro) { ?>
                         <tr>
-                            <td><?php echo $libro['titulo']; ?></td>
-                            <td><?php echo $libro['autor']; ?></td>
-                            <td><?php echo $libro['Id']; ?></td>
+                            <td>
+                                <?php echo $libro['titulo']; ?>
+                            </td>
+                            <td>
+                                <?php echo $libro['autor']; ?>
+                            </td>
+                            <td>
+                                <?php echo $libro['Id']; ?>
+                            </td>
                         </tr>
                     <?php } ?>
                 </tbody>
@@ -76,8 +84,5 @@ ini_set('display_errors', 1);
         </div>
     </div>
 </body>
-
-
-
 
 </html>

@@ -14,11 +14,13 @@ ini_set('display_errors', 1);
 <body>
     <div class="container">
         <h1>Sistema de Gestión de Biblioteca</h1>
-        <?php if(isset($_SESSION['mensaje'])) $mensaje =$_SESSION['mensaje']; ?>
-            <div class="mensaje">
-                <?php  if(isset($mensaje)) echo $mensaje; ?>
-            </div>
-            <?php  ?>
+        <?php if (isset($_SESSION['mensaje']))
+            $mensaje = $_SESSION['mensaje']; ?>
+        <div class="mensaje">
+            <?php if (isset($mensaje))
+                echo $mensaje; ?>
+        </div>
+        <?php ?>
 
         <!-- Eliminar Libro Formulario -->
         <h2>Eliminar Libro</h2>
@@ -38,10 +40,10 @@ ini_set('display_errors', 1);
 
         <div class="enlaces">
             <div class="enlace">
-                <h3><a href=" <?php echo $_SERVER['PHP_SELF']."?accion=menu"; ?>">Menú</a></h3>
+                <h3><a href=" <?php echo $_SERVER['PHP_SELF'] . "?accion=menu"; ?>">Menú</a></h3>
             </div>
             <div class="enlace">
-                <h3><a href=" <?php echo $_SERVER['PHP_SELF']."?accion=salir"; ?>">Salir</a></h3>
+                <h3><a href=" <?php echo $_SERVER['PHP_SELF'] . "?accion=salir"; ?>">Salir</a></h3>
             </div>
         </div>
     </div>
