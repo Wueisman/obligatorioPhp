@@ -1,22 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+
+<head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Registro</title>
     <link rel="stylesheet" href="publico/estilos.css">
-  </head>
-  <body>
+</head>
 
-
+<body>
     <div class="container">
         <h1>Sistema de Gestión de Biblioteca</h1>
         <?php //$mensaje = $sesion->getMensaje(); { ?>
-            <div class="mensaje">
-                <?php //echo $mensaje; ?>
-            </div>
-        <?php// } ?>
+        <div class="mensaje">
+            <?php //echo $mensaje; ?>
+        </div>
+        <? php // } ?>
 
         <!-- Agregar Usuario Formulario -->
         <h2>Registrarse</h2>
@@ -40,12 +40,13 @@
             </div>
             <div class="form-group">
                 <button type="submit">Envíar</button>
-            </div>            
+            </div>
         </form>
         <div class="enlace">
-            <h3><a href=" <?php echo $_SERVER['PHP_SELF']; ?>">Inicio</a><h3>
+            <h3><a href=" <?php echo $_SERVER['PHP_SELF']; ?>">Inicio</a>
+                <h3>
         </div>
     </div>
+</body>
 
-  </body>
 </html>
